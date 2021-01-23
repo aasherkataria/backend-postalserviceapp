@@ -8,7 +8,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const parcelRoute = require('./routes/locationInfo');
+const parcelRoute = require('./routes/parcelRoute');
 
 
 app.use('/parcel', parcelRoute);
