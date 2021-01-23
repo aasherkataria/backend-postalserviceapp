@@ -4,24 +4,22 @@ const express = require('express');
 const router = express.Router();
 
 
-router.post('/', (res, req) => {
-    console.log(req);
+router.post('/', (req, res) => {
 
+    // create a parcel
     const parcel = {...{destination, starting, customerName} = 
     req.body };
-
+    // insert into database
     location.parcel(parcel);
-    // try {
-    //     const parcel = await location.setLocation({
-    //         dest: req.body.destination, 
-    //         starting: req.body.starting,
-    //         customer : req.body.customerName
-    //     });
-    //     res.json(removedPost);
-    // } catch (err) {
-    //     res.json({message: err});
-    // }
+    // return original 
+    res.json("Parcel Entered Successfully");
 
+});
+
+router.get('/:trackingNumber', (req, res) => {
+    const parcel = location.getPackage(req.params.trackingNumber);
+    
+    res.send(parcel);
 });
 
 module.exports = router;
