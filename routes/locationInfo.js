@@ -16,10 +16,10 @@ router.post('/', (req, res) => {
 
 });
 
-router.get('/:trackingNumber', (req, res) => {
-    const parcel = location.getPackage(req.params.trackingNumber);
-    
-    res.send(parcel);
+router.get('/:trackingNumber', async (req, res) => {
+    const parcel = await location.getPackage(req.params.trackingNumber);
+    // return the package in form of json
+    res.json(parcel);
 });
 
 module.exports = router;

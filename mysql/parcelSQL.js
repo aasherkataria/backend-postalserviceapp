@@ -45,15 +45,17 @@ const createPackage = (parcelInfo) => {
 }
 
 const getPackage = (trackingId) => {
-    console.log(trackingId);
     let sql = `SELECT * FROM packages WHERE trackingId =  CONCAT("${trackingId}")`;
-    let query = db.query(sql, (err, result) => {
-        if (err) throw err;
-        console.log(result);
-        return result;
-    });
+    return new Promise ((resolve, reject) => {
+        let query = db.query(sql, (err, result) => {
+            if (err) throw err;
+            //console.log(result);
+            package = result;
+            resolve(result);
+        });
+    })
 
-    console.log(query);
 }
+
 
 module.exports = {createPackage, getPackage};
