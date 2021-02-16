@@ -11,7 +11,7 @@ app.use(express.json());
 const parcelRoute = require('./routes/parcelRoute');
 
 
-app.use('/parcel', parcelRoute);
+app.use('/employee/parcel', parcelRoute);
 
 app.listen('3000', () => {
     console.log('server started on port 3000');

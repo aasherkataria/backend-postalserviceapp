@@ -1,4 +1,4 @@
-const location = require('../models/parcel');
+const employee = require('../models/parcel');
 const express = require('express');
 
 const router = express.Router();
@@ -10,15 +10,20 @@ router.post('/', (req, res) => {
     const parcel = {...{destination, starting, customerName} = 
     req.body };
     // insert into database
-    location.parcel(parcel);
+    employee.parcel(parcel);
     // return original 
     res.json("Parcel Entered Successfully");
 
 });
 
 router.get('/:trackingNumber', async (req, res) => {
-    const parcel = await location.getPackage(req.params.trackingNumber);
+    const parcel = await employee.getPackage(req.params.trackingNumber);
     // return the package in form of json
+    res.json(parcel);
+});
+
+router.get('/', async (req, res) => {
+    const parcel = await employee.getAllPackages();
     res.json(parcel);
 });
 

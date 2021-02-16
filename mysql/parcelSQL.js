@@ -53,9 +53,20 @@ const getPackage = (trackingId) => {
             package = result;
             resolve(result);
         });
-    })
+    });
 
+};
+
+const getAllPackages = () => {
+    let sql = `SELECT * FROM packages`;
+    return new Promise ((resolve, reject) => {
+        let query = db.query (sql, (err, result) => {
+            if (err) throw err;
+            package = result;
+            resolve(result);
+        });
+    });
 }
 
 
-module.exports = {createPackage, getPackage};
+module.exports = {createPackage, getPackage, getAllPackages};
