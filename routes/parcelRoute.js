@@ -16,6 +16,11 @@ router.post('/', (req, res) => {
 
 });
 
+router.post('/:trackingNumber', async(req, res) => {
+    const parcel = await employee.updatePackage(req.params.trackingNumber, req.body.customerName);
+    res.json("Parcel Updated Successfully");
+})
+
 router.get('/:trackingNumber', async (req, res) => {
     const parcel = await employee.getPackage(req.params.trackingNumber);
     // return the package in form of json

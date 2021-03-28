@@ -19,10 +19,10 @@ db.connect((err) => {
 const createPackage = (parcelInfo) => {
 
     function makeid() {
-        var text = "";
-        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        let text = "";
+        let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
       
-        for (var i = 0; i < 12; i++)
+        for (let i = 0; i < 12; i++)
           text += possible.charAt(Math.floor(Math.random() * possible.length));
       
         return text;
@@ -45,7 +45,7 @@ const createPackage = (parcelInfo) => {
 }
 
 const getPackage = (trackingId) => {
-    let sql = `SELECT * FROM packages WHERE trackingId =  CONCAT("${trackingId}")`;
+    let sql = `SELECT * FROM packages WHERE trackingId = "${trackingId}"`;
     return new Promise ((resolve, reject) => {
         let query = db.query(sql, (err, result) => {
             if (err) throw err;
@@ -68,5 +68,16 @@ const getAllPackages = () => {
     });
 }
 
+const updatePackage = (trackingID, customerName) => {
+    let sql = `UPDATE packages SET customerName = "${customerName}" WHERE packages.trackingId = "${trackingID}"`;
+    return new Promise ((resolve, reject) => {
+        let query = db.query (sql, (err, result) => {
+            if (err) throw err;
+            package = result;
+            resolve(result);
+        });
+    });
+}
 
-module.exports = {createPackage, getPackage, getAllPackages};
+
+module.exports = {createPackage, getPackage, getAllPackages, updatePackage};
