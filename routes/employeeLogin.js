@@ -47,8 +47,6 @@ router.post('/signup', (req, res, next) => {
         }); 
      }
 
-     console.log('here');
-
      email = email.toLowerCase();
      Employee.find({
         email: email
